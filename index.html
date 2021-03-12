@@ -30,6 +30,10 @@
             position: absolute;
             /* left:60px; */
             bottom: 100px;
+            background-image: url('car23-removebg-preview.png');
+            background-repeat: no-repeat;
+            background-size:100% 100%;
+            
         }
         .gameArea{
             width: 400px ;
@@ -37,6 +41,7 @@
             background-color: #2c3e50;
             margin: auto;
             position: relative;
+            overflow: hidden;
             border-left:10px dashed white;
             border-right:10px dashed white;
 
@@ -53,6 +58,8 @@
 
         }
         .score{
+            padding: 10px ;
+            padding-top: 20px;
             position: absolute;
             top: 20px;
             left: 40px;
@@ -61,6 +68,8 @@
             width: 200px;
             text-align: center;
             color: crimson;
+            flex-wrap: wrap;
+            text-size-adjust: 50px;
             box-shadow: 0 5px 5px #777;
         }
         .startScreen{
@@ -70,7 +79,7 @@
             top: 50%;
             transform: translate(-50%,-50%);
             color: black;
-            padding: 15px;
+           padding: 15px;
             margin: auto;
             width: 50%;
             cursor: pointer;
@@ -80,6 +89,12 @@
             text-transform: uppercase;
             box-shadow: 0 5px 5px #777;
             z-index: 1;
+
+        }
+        body{
+            background-image: url(desert.jpg);
+            background-repeat: no-repeat;
+            background-size:100% 100%;
 
         }
 
@@ -149,6 +164,7 @@
          function endgame(){
              player.start=false;
              startScreen.classList.remove('hide');
+             startScreen.innerHTML="Game Over <br> Your Final Score Is "+ player.score+"<br> Press here to restart the Game ";
 
          }
          function moveEnemy(car){
@@ -191,7 +207,8 @@
             // console.log(player.score++);
 
             player.score++;
-            score.innerText="Score: "+ player.score;
+            let ps=player.score-1;
+            score.innerText="Score: "+ps;
         }
 
         }
@@ -231,13 +248,20 @@
                     enemyCar.setAttribute('class','enemy');
                     enemyCar.y=((x+1)*350)*-1;
                     enemyCar.style.top=enemyCar.y+ "px" ;
-                    enemyCar.style.background="green";
+                    enemyCar.style.backgroundColor=randomColor();
                     enemyCar.style.left=Math.floor(Math.random()*350)+"px";
                     gameArea.appendChild(enemyCar)
 
              }
 
 
+         }
+         function randomColor(){
+             function c(){
+                 let hex=Math.floor(Math.random()*256).toString(16);
+                 return("0"+String(hex)).substr(-2)
+             }
+             return "#"+c()+c()+c(); 
          }
 
           
